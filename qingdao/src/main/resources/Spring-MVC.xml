@@ -1,0 +1,57 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
+
+    <!-- 扫描web相关的bean -->
+    <context:component-scan base-package="com.monster.contorller"/>
+
+    <!-- 开启SpringMVC注解模式 -->
+    <mvc:annotation-driven/>
+
+    <!-- 静态资源默认servlet配置 -->
+    <mvc:default-servlet-handler/>
+    
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/"/>
+            <mvc:exclude-mapping path="/login"/>
+            <mvc:exclude-mapping path="/sign_in"/>
+            <mvc:exclude-mapping path="/log_out"/>
+            <mvc:exclude-mapping path="/js/*"/>
+            <mvc:exclude-mapping path="/css/*"/>
+            <mvc:exclude-mapping path="/img/*"/>
+            <mvc:exclude-mapping path="/fonts/*"/>
+            <bean class="com.monster.fillter.SecurityInterceptor"></bean>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.monster.fillter.PowerInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+
+    <!-- 配置jsp 显示ViewResolver -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+          p:defaultEncoding="UTF-8"
+          p:maxUploadSize="5400000"
+
+    />
+
+
+
+</beans>

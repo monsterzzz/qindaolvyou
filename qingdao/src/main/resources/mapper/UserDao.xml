@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.monster.dao.UserDao">
+    <insert id="addUser" parameterType="User">
+        INSERT INTO users VALUES (NULL,#{name},#{account},#{password},#{age},#{sex})
+    </insert>
+    <update id="updateUser" parameterType="User">
+        UPDATE users SET name=#{name},age=#{age},password=#{password} WHERE id=#{id}
+    </update>
+    <delete id="deleteUser" parameterType="int">
+        DELETE FROM users WHERE id=#{id}
+    </delete>
+    <select id="queryUserById" parameterType="int" resultType="User">
+        SELECT * FROM users where id=#{id}
+    </select>
+    <select id="queryUserByAccount" parameterType="string" resultType="User">
+        SELECT * FROM users where account=#{account}
+    </select>
+    <select id="queryAccountExists" parameterType="string" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM users WHERE account=#{account}
+    </select>
+    <select id="getTotal" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM users
+    </select>
+    <select id="getAllUser" resultType="com.monster.pojo.User">
+        SELECT * FROM users
+    </select>
+    <select id="isAdmin" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM admins where uid = #{id}
+    </select>
+
+</mapper>

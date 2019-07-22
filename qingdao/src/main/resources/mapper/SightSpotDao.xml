@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.monster.dao.SightSpotDao">
+    <select id="getTotal" resultType="integer">
+          SELECT COUNT(*) FROM sight_spots
+    </select>
+
+    <insert id="addSightSpot" parameterType="SightSpot">
+          INSERT into sight_spots VALUES (NULL,#{spot_id},#{name},#{descri},#{tel},#{pay_time},#{money},#{open_time},#{close_time},#{tsf},#{season},#{big})
+    </insert>
+
+    <delete id="deleteSightSpot" parameterType="int">
+        DELETE FROM sight_spots WHERE spot_id=#{sid}
+    </delete>
+
+    <update id="updateSightSpot" parameterType="SightSpot">
+        UPDATE sight_spots SET descri = #{descri},name = #{name},tel =  #{tel},
+              pay_time = #{pay_time},money =  #{money},pay_time =  #{pay_time},open_time =  #{open_time},close_time =  #{close_time},tsf =#{tsf},season = #{season},big = #{big} where spot_id=#{spot_id}
+    </update>
+
+    <select id="querySightSpotByid" parameterType="int" resultType="SightSpot">
+        SELECT * FROM sight_spots WHERE id=#{id}
+    </select>
+
+    <select id="querySightSpotBySid" parameterType="int" resultType="SightSpot">
+        SELECT * FROM sight_spots WHERE spot_id = #{sid}
+    </select>
+
+    <select id="getAllSightSpot" resultType="SightSpot">
+        SELECT * FROM sight_spots
+    </select>
+    <select id="getPageSightSpot" resultType="com.monster.pojo.SightSpot">
+        SELECT * FROM sight_spots LIMIT #{arg0},#{arg1}
+    </select>
+    <select id="getSightSpotByName" resultType="com.monster.pojo.SightSpot">
+        SELECT * FROM sight_spots WHERE name LIKE CONCAT(CONCAT('%',#{arg0}),'%')
+    </select>
+    <select id="getSightSpotByTime" resultType="com.monster.pojo.SightSpot">
+        SELECT * FROM sight_spots WHERE (open_time &lt; #{arg0} AND close_time &gt; #{arg0}) OR (close_time = 0 AND open_time = 0) LIMIT #{arg1},#{arg2}
+    </select>
+    <select id="getTimeTotal" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM sight_spots WHERE (open_time &lt; #{arg0} AND close_time &gt; #{arg0}) OR (close_time = 0 AND open_time = 0)
+    </select>
+    <select id="getNameTotal" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM sight_spots WHERE name LIKE CONCAT(CONCAT('%',#{arg0}),'%')
+    </select>
+    <select id="getBigSightSpots" resultType="com.monster.pojo.SightSpot">
+        SELECT * FROM sight_spots WHERE big = 1;
+    </select>
+    <select id="getSeasonSightSpots" resultType="com.monster.pojo.SightSpot">
+        SELECT * FROM sight_spots WHERE season = #{season};
+    </select>
+
+</mapper>

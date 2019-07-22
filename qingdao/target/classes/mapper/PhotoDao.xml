@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.monster.dao.PhotoDao">
+    <insert id="addPhoto" parameterType="Photo">
+        INSERT INTO photos VALUES (NULL ,#{sid},#{is_small},#{path})
+    </insert>
+
+    <update id="updateSmallPhoto">
+        UPDATE photos SET path = #{param2} WHERE sid = #{param1} and is_small = 1
+    </update>
+
+    <select id="queryPhotosBySid" parameterType="int" resultType="Photo">
+        SELECT * from photos WHERE sid = #{sid}
+    </select>
+    <select id="querySmallImg" resultType="com.monster.pojo.Photo">
+        SELECT * from photos WHERE sid = #{sid} and is_small = 1
+    </select>
+    <select id="queryPhotoByPid" resultType="com.monster.pojo.Photo">
+        SELECT * from photos where id = #{pid}
+    </select>
+    <select id="smallPhotoExists" resultType="java.lang.Integer">
+        SELECT COUNT(*) from photos where sid = #{sid} and is_small = 1
+    </select>
+
+    <delete id="deletePhoto" parameterType="int" >
+        DELETE FROM photos WHERE id = #{pid}
+    </delete>
+    <delete id="deleteSightSpotPhoto" parameterType="int">
+        DELETE FROM photos WHERE sid = #{sid}
+    </delete>
+
+</mapper>

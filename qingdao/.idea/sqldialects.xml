@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/src/main/resources/mapper/ActionDao.xml" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/mapper/AdminDao.xml" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/mapper/PhotoDao.xml" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/mapper/SightSpotDao.xml" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/mapper/UserDao.xml" dialect="MySQL" />
+  </component>
+</project>

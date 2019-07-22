@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.monster.dao.SigthSpotDao">
+    <select id="getTotal" resultType="integer">
+          SELECT COUNT(*) FROM sight_spots
+    </select>
+
+    <insert id="addSightSpot" parameterType="SightSpot">
+          INSERT into sight_spots VALUES (NULL,#{spot_id},#{name},#{desc},#{tel},#{pay_time},#{money},#{pay_time},#{open_time},#{tsf})
+    </insert>
+
+    <delete id="deleteSightSpot" parameterType="int">
+        DELETE FROM sight_spots WHERE id=#{id}
+    </delete>
+
+    <update id="updateSightSpot" parameterType="SightSpot">
+        UPDATE sigth_spots SET desc = #{desc},name = #{name},tel =  #{tel},
+              pay_time = #{pay_time},money =  #{money},pay_time =  #{pay_time},open_time =  #{open_time},tsf =#{tsf}
+    </update>
+
+    <select id="querySightSpotByid" parameterType="int">
+        SELECT * FROM sight_spots WHERE id=#{id}
+    </select>
+
+    <select id="querySightSpotBySid" parameterType="int">
+        SELECT * FROM sight_spots WHERE spot_id = #{sid}
+    </select>
+
+    <select id="getAllSightSpot" resultType="SightSpot">
+        SELECT * FROM sight_spots
+    </select>
+
+</mapper>
